@@ -1,0 +1,36 @@
+---
+title: "First Deliverable"
+output:
+  html_document:
+    df_print: paged
+---
+
+
+
+```{r}
+link="https://github.com/VisualGroupTest/deli1/raw/main/LifeExpect_birth.xlsx"
+
+#call library
+library(rio)
+
+cia=import(link)
+```
+```{r}
+cia80=cia[cia$value>80,]
+```
+
+```{r}
+region80Tab=as.data.frame(table(cia80$region))
+names(region80Tab)=c("region","count")
+region80Tab
+```
+```{r}
+library(ggplot2)
+base= ggplot(data = region80Tab, 
+             aes(x = region,
+                 y = count)) 
+plot1 = base + geom_bar(fill ="gray",
+                        stat = 'identity') 
+plot1
+```
+
